@@ -69,7 +69,7 @@ const SignUp = () => {
         <BiLogoLinkedinSquare/>
         <FcGoogle/>
        </div>
-       <p className='text-center text-[#737373]'>Have an account? <Link className='text-[#FF3811]'>Sign In</Link></p>
+       <p className='text-center text-[#737373]'>Have an account? <Link to='/login' className='text-[#FF3811]'>Sign In</Link></p>
     </div>
   </div>
 </div>
