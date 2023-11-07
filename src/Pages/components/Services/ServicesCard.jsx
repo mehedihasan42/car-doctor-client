@@ -1,10 +1,13 @@
-import React from "react";
+import React from 'react';
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
+import { Link } from 'react-router-dom';
 
-const ServicesCard = ({ card }) => {
-  const { title, img, price, description } = card;
-  return (
-    <div className="card w-96 bg-base-100 border-2 border-b-slate-600 hover:shadow-2xl">
+const ServicesCard = ({card}) => {
+
+    const { _id, title, img, price, description } = card;
+
+    return (
+        <div className="card w-96 bg-base-100 border-2 border-b-slate-600 hover:shadow-2xl">
       <figure className="px-10 pt-10">
         <img src={img} alt="Shoes" className="rounded-xl" />
       </figure>
@@ -14,13 +17,13 @@ const ServicesCard = ({ card }) => {
         <p className="text-start text-[#FF3811]">Price: ${price}</p>
        </div>
         <div className="card-actions justify-end">
-          <button className="mt-8">
+          <Link to={`/services/${_id}`} className="mt-8">
             <BsFillArrowRightCircleFill className="text-[#FF3811] text-xl" />
-          </button>
+          </Link>
         </div>
       </div>
     </div>
-  );
+    );
 };
 
 export default ServicesCard;
