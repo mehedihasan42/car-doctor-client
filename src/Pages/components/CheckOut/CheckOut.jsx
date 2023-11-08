@@ -19,7 +19,7 @@ const CheckOut = () => {
       const message = from.message.value;
       console.log(title,price,first,last,email,number,message)
 
-      const body = {title,price,first,last,email,number,message}
+      const body = {title,price,first,last,email,number,message,img}
 
       fetch('http://localhost:5000/booking',{
         method:'POST',
@@ -72,7 +72,7 @@ const CheckOut = () => {
               </div>
               <textarea placeholder="message" name='message' className="textarea textarea-bordered textarea-lg w-full" ></textarea>
               <div className="form-control mt-6">
-                <button type='submit' className="btn bg-[#FF3811]">Login</button>
+                <button type='submit' className="btn bg-[#FF3811]">Book Now</button>
               </div>
             </form>
           </div>

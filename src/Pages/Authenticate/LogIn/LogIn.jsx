@@ -3,13 +3,16 @@ import img from '../../../assets/images/login/login.svg'
 import { BsFacebook } from "react-icons/bs";
 import { BiLogoLinkedinSquare } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 
 const LogIn = () => {
 
   const {login} = useContext(AuthContext)
+  let navigate = useNavigate();
+  const location = useLocation()
+  const form = location.state?.from?.pathname || '/'
 
    const handleSubmit = event =>{
      event.preventDefault()
@@ -21,6 +24,25 @@ const LogIn = () => {
      login(email,password)
      .then(result=>{
       console.log(result)
+
+      const user = result.user;
+      const loggedUser = {
+        email:user.email
+      }
+
+      fetch('http://localhost:5000/jwt',{
+        method:'POST',
+        headers:{
+          'content-type':'application/json'
+        },
+        body: JSON.stringify(loggedUser)
+      })
+      .then(res=>res.json())
+      .then(result=>{
+        console.log(result)
+        localStorage.setItem('carDoctor-access-toekn',result.token)
+      })
+
       Swal.fire({
         position: "center",
         icon: "success",
@@ -28,6 +50,7 @@ const LogIn = () => {
         showConfirmButton: false,
         timer: 1500
       });
+      navigate(form, { replace: true })
 
     })
    }
