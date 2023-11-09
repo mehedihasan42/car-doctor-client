@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import img from '../../../assets/images/login/login.svg'
 import { BsFacebook } from "react-icons/bs";
 import { BiLogoLinkedinSquare } from "react-icons/bi";
-import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
+import GoogleLogin from '../GoogleLogin/GoogleLogin';
 
 const LogIn = () => {
 
@@ -23,26 +23,8 @@ const LogIn = () => {
 
      login(email,password)
      .then(result=>{
-      console.log(result)
-
-      const user = result.user;
-      const loggedUser = {
-        email:user.email
-      }
-
-      fetch('http://localhost:5000/jwt',{
-        method:'POST',
-        headers:{
-          'content-type':'application/json'
-        },
-        body: JSON.stringify(loggedUser)
-      })
-      .then(res=>res.json())
-      .then(result=>{
-        console.log(result)
-        localStorage.setItem('carDoctor-access-toekn',result.token)
-      })
-
+       const user = result.user;
+       console.log(user)
       Swal.fire({
         position: "center",
         icon: "success",
@@ -85,9 +67,9 @@ const LogIn = () => {
       </form>
         <p className='text-[#444444] text-center'>Or Sign in with</p>
        <div className='flex justify-center text-2xl space-x-3 my-4'>
-       <BsFacebook/>
-        <BiLogoLinkedinSquare/>
-        <FcGoogle/>
+       {/* <BsFacebook/>
+        <BiLogoLinkedinSquare/> */}
+        <GoogleLogin></GoogleLogin>
        </div>
        <p className='text-center text-[#737373]'>Have an account? <Link to='/signUp' className='text-[#FF3811]'>Sign In</Link></p>
     </div>

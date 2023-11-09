@@ -3,13 +3,16 @@ import img from '../../../assets/images/login/login.svg'
 import { BsFacebook } from "react-icons/bs";
 import { BiLogoLinkedinSquare } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 
 const SignUp = () => {
 
   const {createUser} = useContext(AuthContext)
+  let navigate = useNavigate();
+  const location = useLocation()
+  const form = location.state?.from?.pathname || '/'
 
     const handleSubmit = event =>{
         event.preventDefault()
@@ -29,6 +32,8 @@ const SignUp = () => {
             showConfirmButton: false,
             timer: 1500
           });
+          
+          navigate(form, { replace: true })
         })
     }
 
